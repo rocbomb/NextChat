@@ -554,6 +554,17 @@ const en: LocaleType = {
           SubTitle: "Example: ",
         },
       },
+      XiaomiMiMo: {
+        ApiKey: {
+          Title: "Xiaomi MiMo API Key",
+          SubTitle: "Use a custom Xiaomi MiMo API Key",
+          Placeholder: "Xiaomi MiMo API Key",
+        },
+        Endpoint: {
+          Title: "Endpoint Address",
+          SubTitle: "Example: ",
+        },
+      },
     },
 
     Model: "Model",

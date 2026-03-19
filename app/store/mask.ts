@@ -11,6 +11,7 @@ export type Mask = {
   createdAt: number;
   avatar: string;
   name: string;
+  desc: string;
   hideContext?: boolean;
   context: ChatMessage[];
   syncGlobalConfig?: boolean;
@@ -37,6 +38,7 @@ export const createEmptyMask = () =>
     id: nanoid(),
     avatar: DEFAULT_MASK_AVATAR,
     name: DEFAULT_TOPIC,
+    desc: DEFAULT_TOPIC,
     context: [],
     syncGlobalConfig: true, // use global config as default
     modelConfig: { ...useAppConfig.getState().modelConfig },
@@ -95,6 +97,7 @@ export const useMaskStore = createPersistStore(
         (m) =>
           ({
             ...m,
+            desc: m.desc || m.name,
             modelConfig: {
               ...config.modelConfig,
               ...m.modelConfig,
@@ -114,7 +117,7 @@ export const useMaskStore = createPersistStore(
   }),
   {
     name: StoreKey.Mask,
-    version: 3.1,
+    version: 3.2,
 
     migrate(state, version) {
       const newState = JSON.parse(JSON.stringify(state)) as MaskState;
@@ -130,6 +133,12 @@ export const useMaskStore = createPersistStore(
           updatedMasks[m.id] = m;
         });
         newState.masks = updatedMasks;
+      }
+
+      if (version < 3.2) {
+        Object.values(newState.masks).forEach((m) => {
+          m.desc = m.desc || m.name;
+        });
       }
 
       return newState as any;

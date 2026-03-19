@@ -549,6 +549,17 @@ const cn = {
           SubTitle: "样例：",
         },
       },
+      XiaomiMiMo: {
+        ApiKey: {
+          Title: "接口密钥",
+          SubTitle: "使用自定义小米 MiMo API Key",
+          Placeholder: "小米 MiMo API Key",
+        },
+        Endpoint: {
+          Title: "接口地址",
+          SubTitle: "样例：",
+        },
+      },
     },
 
     Model: "模型 (model)",

@@ -60,6 +60,13 @@ const MaskPage = dynamic(async () => (await import("./mask")).MaskPage, {
   loading: () => <Loading noLogo />,
 });
 
+const MaskGallery = dynamic(
+  async () => (await import("./mask-gallery")).MaskGallery,
+  {
+    loading: () => <Loading noLogo />,
+  },
+);
+
 const PluginPage = dynamic(async () => (await import("./plugin")).PluginPage, {
   loading: () => <Loading noLogo />,
 });
@@ -165,6 +172,7 @@ function Screen() {
   const isAuth = location.pathname === Path.Auth;
   const isSd = location.pathname === Path.Sd;
   const isSdNew = location.pathname === Path.SdNew;
+  const isMaskGallery = location.pathname === Path.MaskGallery;
 
   const isMobileScreen = useMobileScreen();
   const shouldTightBorder =
@@ -185,6 +193,7 @@ function Screen() {
     if (isAuth) return <AuthPage />;
     if (isSd) return <Sd />;
     if (isSdNew) return <Sd />;
+    if (isMaskGallery) return <MaskGallery />;
     return (
       <>
         <SideBar

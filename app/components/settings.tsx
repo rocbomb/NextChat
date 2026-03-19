@@ -76,6 +76,7 @@ import {
   DeepSeek,
   SiliconFlow,
   AI302,
+  XiaomiMiMo,
 } from "../constant";
 import { Prompt, SearchService, usePromptStore } from "../store/prompt";
 import { ErrorBoundary } from "./error";
@@ -1499,6 +1500,46 @@ export function Settings() {
       </>
   );
 
+  const xiaomimimoConfigComponent = accessStore.provider === ServiceProvider.XiaomiMiMo && (
+    <>
+      <ListItem
+          title={Locale.Settings.Access.XiaomiMiMo.Endpoint.Title}
+          subTitle={
+            Locale.Settings.Access.XiaomiMiMo.Endpoint.SubTitle +
+            XiaomiMiMo.ExampleEndpoint
+          }
+        >
+          <input
+            aria-label={Locale.Settings.Access.XiaomiMiMo.Endpoint.Title}
+            type="text"
+            value={accessStore.xiaomimimoUrl}
+            placeholder={XiaomiMiMo.ExampleEndpoint}
+            onChange={(e) =>
+              accessStore.update(
+                (access) => (access.xiaomimimoUrl = e.currentTarget.value),
+              )
+            }
+          ></input>
+        </ListItem>
+        <ListItem
+          title={Locale.Settings.Access.XiaomiMiMo.ApiKey.Title}
+          subTitle={Locale.Settings.Access.XiaomiMiMo.ApiKey.SubTitle}
+        >
+          <PasswordInput
+            aria-label={Locale.Settings.Access.XiaomiMiMo.ApiKey.Title}
+            value={accessStore.xiaomimimoApiKey}
+            type="text"
+            placeholder={Locale.Settings.Access.XiaomiMiMo.ApiKey.Placeholder}
+            onChange={(e) => {
+              accessStore.update(
+                (access) => (access.xiaomimimoApiKey = e.currentTarget.value),
+              );
+            }}
+          />
+        </ListItem>
+      </>
+  );
+
   return (
     <ErrorBoundary>
       <div className="window-header" data-tauri-drag-region>
@@ -1864,6 +1905,7 @@ export function Settings() {
                   {chatglmConfigComponent}
                   {siliconflowConfigComponent}
                   {ai302ConfigComponent}
+                  {xiaomimimoConfigComponent}
                 </>
               )}
             </>
